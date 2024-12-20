@@ -1,0 +1,204 @@
+
+/*
+ * when you click the button, it will change teh current summon to a new oen
+ * for loop to see which one can be summoned
+ * 
+ */
+
+
+Ideas:
+To do:
+- Create enemy strucutre + spawns
+- Create collison between the two
+
+
+- have a mana system
+- mana drains everytime your units move
+- add soundeffects
+FeedBack:
+-   Make it more intuitive thata the left is the selection screen
+
+- Add two backgrounds, one of a grass-field and the other no-man field like
+
+if there is a collision made, send the whatever completely off screen
+
+//consider adding walls
+*/
+
+
+
+/*Dead code 
+
+
+        //for (var currentBullet : bullets) {pane.getChildren().add(currentBullet.circle);}
+        //redudnant code, removed p-p
+
+
+
+    pane.setOnMouseClicked(e -> {
+        if(ball.contains(e.getX(), e.getY())){
+            ball.setFill(Color.AQUAMARINE);
+        } else { 
+            ball.setFill(Color.RED);
+        }
+    });
+
+    primaryStage.setFullScreen(true); //makes the screen automatically bigger
+
+    // Create a horizontal line near the bottom of the screen
+    Line horizontalLine = new Line(0, boardHeigth - 100, boardWidth, boardHeigth - 100);  // Horizontal line 100 pixels from the bottom
+    horizontalLine.setStroke(Color.BLACK);  // Set the line color to black
+    horizontalLine.setStrokeWidth(20);  // Adjust thickness if needed
+    pane.getChildren().add(horizontalLine);  // Add the hor
+                    
+    Ball newBall = new Ball(e.getX(), e.getY(), radius);
+    Bullets.add(newBall);
+    pane.getChildren().add(newBall.Bullet);  // Add the Bullet to the pane
+            
+
+
+    pane.getChildren().remove()
+
+    Text scoreText = new Text("Score: " + score);
+    scoreText.setFont(new Font(30)); // Set font size
+    scoreText.setFill(Color.BLACK); // Set text color
+    scoreText.setX(20); // Position on the pane
+    scoreText.setY(50);
+
+    //will refine this code into a single method
+    for (var ball : Bullets)
+    {  
+        double y = ball.Bullet.getCenterY();// Update the ball's position
+        if ((y <= radius || y >= boardHeigth - radius) && !ball.hasScored) //checks to see if it passed the screen
+        {
+            ball.hasScored = true;
+            score++;
+            scoreText.setText("Score: " + score);
+        }
+        ball.Bullet.setCenterY(y - ball.vertSpeed);// Move the ball (speed determines how much in y coordinates it moves in one frame)
+    }        
+
+
+
+
+
+
+
+                    //Collision system
+
+                    List<Bullet> bulletsToRemove = new ArrayList<>();
+                    List<Bullet> enemyBulletsToRemove = new ArrayList<>();
+                    for (var playerBullet : bullets) 
+                    {
+                        double distX = playerBullet.circle.getCenterX() - botBullet.circle.getCenterX();
+                        double distY = playerBullet.circle.getCenterY() - botBullet.circle.getCenterY();
+                        double distance = Math.sqrt(distX * distX + distY * distY);
+                
+                        if (distance <= (playerBullet.getRadius() + botBullet.getRadius())) {
+                            // Handle bullet collision
+                            pane.getChildren().removeAll(playerBullet.circle, botBullet.circle);
+                            bullets.add(playerBullet);
+                            enemyBullets.add(botBullet);
+                            break;//can be removed
+                        }
+                    }
+                    bullets.removeAll(bulletsToRemove);
+                    enemyBullets.removeAll(enemyBulletsToRemove);
+
+
+
+
+//Collision detection system
+                    ArrayList <Bullet> bulletsToRemove = new ArrayList<>(), enemyBulletsToRemove = new ArrayList<>();
+                    for (var playerBullet : bullets) 
+                    {
+                        double distX = playerBullet.circle.getCenterX() - botBullet.circle.getCenterX();
+                        double distY = playerBullet.circle.getCenterY() - botBullet.circle.getCenterY();
+                        double distance = Math.sqrt(distX * distX + distY * distY);
+                
+                        if (distance <= playerBullet.getRadius() + botBullet.getRadius()) 
+                        {
+                            playerBullet.hitpoint--; botBullet.hitpoint--; //decreases hp of both bullets
+                            if (playerBullet.hitpoint == 0)
+                            {
+                                bulletsToRemove.add(playerBullet);
+                                pane.getChildren.remove(playerBullet.circle);
+                            }
+
+                            if (botBullet.hitpoint == 0)
+                            {
+                                enemyBulletsToRemove.add(botBullet);
+                                pane.getChildren.remove(botBullet.circle);
+                            }
+                            //break;//prevents it from deleating other bullets
+                        }
+                    }
+                    bullets.removeAll(bulletsToRemove);
+                    enemyBullets.removeAll(enemyBulletsToRemove);
+
+
+for (var botBullet : enemyBullets) 
+{  
+    ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
+    ArrayList<Bullet> enemyBulletsToRemove = new ArrayList<>();
+    
+    for (var playerBullet : bullets) 
+    {
+        double distX = playerBullet.circle.getCenterX() - botBullet.circle.getCenterX();
+        double distY = playerBullet.circle.getCenterY() - botBullet.circle.getCenterY();
+        double distance = Math.sqrt(distX * distX + distY * distY);
+
+        if (distance <= playerBullet.getRadius() + botBullet.getRadius()) {
+            playerBullet.hitpoint--;
+            botBullet.hitpoint--;  // decreases hp of both bullets
+            
+            if (playerBullet.hitpoint == 0) {
+                bulletsToRemove.add(playerBullet);
+                // Delay removal of playerBullet here
+            }
+
+            if (botBullet.hitpoint == 0) {
+                enemyBulletsToRemove.add(botBullet);
+                // Delay removal of botBullet here
+            }
+        }
+    }
+
+    // Now remove the bullets after finishing the loop
+    bullets.removeAll(bulletsToRemove);
+    enemyBullets.removeAll(enemyBulletsToRemove);
+}
+
+
+
+
+
+                    //below chunck of code deals with collision between the enemys' balls with playersball, checking if enemy ball has collided with player ball
+                    ArrayList <Bullet> bulletsToRemove = new ArrayList<>(), enemyBulletsToRemove = new ArrayList<>();
+                    for (var playerBullet : bullets) 
+                    {
+                        double distX = playerBullet.circle.getCenterX() - botBullet.circle.getCenterX();
+                        double distY = playerBullet.circle.getCenterY() - botBullet.circle.getCenterY();
+                        double distance = Math.sqrt(distX * distX + distY * distY);
+
+                        if (distance <= playerBullet.getRadius() + botBullet.getRadius()) 
+                        {
+                            playerBullet.hitpoint--; botBullet.hitpoint--; //decreases hp of both bullets
+
+                            if (botBullet.hitpoint <= 0)
+                            {
+                                //enemyBulletsToRemove.add(botBullet);
+                                //pane.getChildren().remove(botBullet.circle);
+                                HelperMethods.removeBullet(pane, enemyBullets, botBullet);
+                            }
+                            if (playerBullet.hitpoint <= 0)
+                            {
+                                bulletsToRemove.add(playerBullet);
+                                pane.getChildren().remove(playerBullet.circle);
+                                break;
+                            }
+                        }
+                    }
+                    bullets.removeAll(bulletsToRemove);
+                    //enemyBullets.removeAll(enemyBulletsToRemove);
+                   //end of collision detection
